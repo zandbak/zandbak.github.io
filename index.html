@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LDCharCrypto</title>
+	</head>
+	<body>		
+		<form onsubmit="ajaxIt(this);return false">
+			<input type="text" name="uid" placeholder="UID">
+			<input type="text" name="id" placeholder="Char/Vehicle ID">
+			<button type="submit">Calculate</button>
+		</form>
+		<div class="page">35 (0x23) <span data-page="35">00000000</span></div>
+		<div class="page">36 (0x24) <span data-page="36">00000000</span></div>
+		<div class="page">37 (0x25) <span data-page="37">00000000</span></div>
+		<div class="page">38 (0x26) <span data-page="38">00000000</span> (Token Type)</div>
+		<div class="page">43 (0x2B) <span data-page="43">00000000</span> (PWD)</div>
+	</body>
+	<style type="text/css">
+		[data-page]{
+			font-family: monospace;
+			width: 8em;
+			background: #e0e0e0;    
+			padding: 1px 5px;
+    		border-radius: 5px;
+		}
+	</style>
+	<script type="text/javascript">
+		function ajaxIt(frm){
+			fetch("https://ldcharcrypto.ags131.com/api/ld",{
+				method: 'POST',
+				body: JSON.stringify({ uid: frm.uid.value, id: frm.id.value }),
+				headers: {
+			    	'Content-Type': 'application/json'
+			    }
+			}).then(req=>req.json())
+			.then(data=>{
+				let pages = document.querySelectorAll('[data-page]')
+				pages.forEach(page=>{
+					let p = page.dataset.page
+					let v = data.pages[p]
+					page.innerHTML = v
+				})
+			})
+		}
+	</script>
+</html>
