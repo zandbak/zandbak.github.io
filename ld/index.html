@@ -12,8 +12,6 @@
 		function GetParams(){
     document.getElementById('demo').innerHTML = new URLSearchParams(document.location.search).get("UID")
 		}
+        window.onload = GetParams()
 	</script>
 </html>
-
-
-
