@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LDCharCrypto</title>
+	</head>
+	<body>		
+		<p>Provide tagid and text params</p>
+
+  <p id="tagid"></p>
+  <p id="text"></p>
+
+	<script type="text/javascript">
+		function GetParams(){
+    	document.getElementById('tagid').innerHTML = new URLSearchParams(document.location.search).get("tagid")
+	document.getElementById('text').innerHTML = new URLSearchParams(document.location.search).get("text")
+		}
+        window.onload = GetParams()
+	</script>
+</html>
